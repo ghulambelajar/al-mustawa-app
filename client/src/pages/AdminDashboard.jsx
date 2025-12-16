@@ -17,7 +17,6 @@ const AdminDashboard = () => {
     fetchData();
   }, []);
 
-  // FUNGSI DOWNLOAD EXCEL
   const handleDownload = () => {
     window.open("http://localhost:5000/api/register/export", "_blank");
   };
@@ -28,7 +27,6 @@ const AdminDashboard = () => {
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-slate-800">Dashboard Admin</h1>
 
-          {/* INI TOMBOL DOWNLOADNYA */}
           <button
             onClick={handleDownload}
             className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-bold flex items-center gap-2 shadow-lg transition"
@@ -37,10 +35,8 @@ const AdminDashboard = () => {
           </button>
         </div>
 
-        {/* ... (Tabel Data di bawah sini) ... */}
         <div className="bg-white rounded-xl shadow p-6">
           <p>Total Pendaftar: {students.length}</p>
-          {/* Render tabel students disini */}
         </div>
       </div>
     </div>

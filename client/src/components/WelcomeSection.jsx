@@ -24,7 +24,6 @@ const WelcomeSection = () => {
             <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-blue-100 rounded-full -z-10 blur-xl"></div>
           </div>
 
-          {/*Teks Sambutan */}
           <div className="w-full md:w-1/2">
             <h4 className="text-blue-600 font-bold uppercase tracking-wider mb-2">
               Sambutan Direktur

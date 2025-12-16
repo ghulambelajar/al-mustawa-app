@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-import Swal from "sweetalert2"; // Pastikan sudah npm install sweetalert2
-import logoBeranda from "../assets/images/home-mustawa.png"; // Pastikan path gambarnya benar
+import Swal from "sweetalert2";
+import logoBeranda from "../assets/images/home-mustawa.png";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -19,10 +19,8 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Kirim data ke backend
       await axios.post("http://localhost:5000/api/register", formData);
 
-      // 1. PERBAIKAN SWEETALERT (Ganti alert biasa jadi ini)
       Swal.fire({
         title: "Alhamdulillah!",
         text: "Pendaftaran Berhasil Terkirim.",
@@ -30,8 +28,6 @@ const Register = () => {
         confirmButtonColor: "#3085d6",
         confirmButtonText: "Oke",
       });
-
-      // Reset Form
       setFormData({
         full_name: "",
         age: "",
@@ -42,7 +38,6 @@ const Register = () => {
       });
     } catch (error) {
       console.error(error);
-      // Alert Gagal
       Swal.fire({
         title: "Gagal!",
         text: "Terjadi kesalahan saat mendaftar. Silakan coba lagi.",
@@ -53,7 +48,6 @@ const Register = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans pb-20">
-      {/* HEADER GAMBAR */}
       <div className="relative h-[45vh] flex items-center justify-center">
         <img
           src={logoBeranda}
@@ -71,9 +65,6 @@ const Register = () => {
         </div>
       </div>
 
-      {/* 2. PERBAIKAN JARAK (SPACING) */}
-      {/* -mt-16 artinya narik ke atas supaya menumpuk sedikit di header (Desain Modern) */}
-      {/* z-20 supaya dia muncul di atas header */}
       <div className="relative z-20 max-w-3xl mx-auto px-4 -mt-16">
         <div className="bg-white p-8 rounded-xl shadow-2xl border border-gray-100">
           <form onSubmit={handleSubmit} className="space-y-6">

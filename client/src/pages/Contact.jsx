@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { MapPin, Phone, Mail, Clock } from "lucide-react"; // Import Icon Baru
+import { MapPin, Phone, Mail, Clock } from "lucide-react";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -46,9 +46,7 @@ const Contact = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 py-16">
-        {/* BAGIAN A: PETA LEBAR (Sesuai Referensi Gambar) */}
         <div className="w-full h-[400px] bg-gray-200 rounded-xl overflow-hidden shadow-md mb-16 border border-gray-200">
-          {/* Ganti src iframe ini dengan link embed Google Maps asli lokasi TPA-mu nanti */}
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.073543665396!2d111.45899737406958!3d-7.887372678453488!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e79a0397501b139%3A0xc304033c5e88417c!2sMasjid%20Besar%20Mustawa!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
             width="100%"
@@ -60,7 +58,6 @@ const Contact = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* KOLOM KIRI: INFO KONTAK (Communicate us) */}
           <div className="lg:col-span-1 space-y-8">
             <h2 className="text-2xl font-bold text-slate-900 border-l-4 border-blue-600 pl-3">
               Informasi Kontak
