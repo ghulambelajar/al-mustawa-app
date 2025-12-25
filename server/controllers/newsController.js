@@ -38,7 +38,11 @@ const getNewsById = async (req, res) => {
 };
 
 const createNews = async (req, res) => {
-  const { title, content, image_url, event_date } = req.body;
+  const { title, content, event_date } = req.body;
+  const image_url = req.file
+    ? `http://localhost:5000/uploads/${req.file.filename}`
+    : req.body.image_url;
+
   try {
     const result = await db.query(
       `INSERT INTO news (title, content, image_url, event_date) 
