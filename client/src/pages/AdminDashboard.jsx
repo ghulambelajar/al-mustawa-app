@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Download, LogOut, Plus, Trash2, Newspaper, Users } from "lucide-react";
+import { Download, Plus, Trash2, Newspaper, Users } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const AdminDashboard = () => {
-  const [activeTab, setActiveTab] = useState("registrations"); // tab change state
+  const [activeTab, setActiveTab] = useState("registrations");
   const [students, setStudents] = useState([]);
   const [newsList, setNewsList] = useState([]);
 
-  // new news data form
   const [newsForm, setNewsForm] = useState({
     title: "",
     content: "",
@@ -19,7 +18,7 @@ const AdminDashboard = () => {
 
   const navigate = useNavigate();
 
-  // security
+  // Check Security
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -48,39 +47,18 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleLogout = () => {
-    Swal.fire({
-      title: "Mau Keluar?",
-      text: "Anda harus login ulang untuk masuk kembali.",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Ya, Logout!",
-      cancelButtonText: "Batal",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        localStorage.removeItem("token");
-        navigate("/login");
-        Swal.fire("Logout!", "Anda berhasil keluar.", "success");
-      }
-    });
-  };
-
   const handlePostNews = async (e) => {
     e.preventDefault();
 
-    // Pakai FormData untuk kirim File
     const formData = new FormData();
     formData.append("title", newsForm.title);
     formData.append("content", newsForm.content);
     formData.append("event_date", newsForm.event_date);
     if (newsForm.image) {
-      formData.append("image", newsForm.image); // Kirim filenya
+      formData.append("image", newsForm.image);
     }
 
     try {
-      // Content-Type akan otomatis diurus oleh axios saat pakai FormData
       await axios.post("http://localhost:5000/api/news", formData);
 
       Swal.fire("Sukses", "Berita berhasil diterbitkan!", "success");
@@ -93,6 +71,7 @@ const AdminDashboard = () => {
       Swal.fire("Gagal", "Terjadi kesalahan", "error");
     }
   };
+
   const handleDeleteNews = async (id) => {
     const result = await Swal.fire({
       title: "Yakin mau hapus?",
@@ -115,17 +94,12 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 font-sans pt-20">
-      {/* Sidebar */}
-      <div className="bg-slate-900 text-white p-6 shadow-md">
+    <div className="min-h-screen bg-slate-100 font-sans pt-24">
+      <div className="bg-white text-slate-800 p-6 shadow-sm border-b mb-8">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Admin Panel TPA</h1>
-          <button
-            onClick={handleLogout}
-            className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-bold transition"
-          >
-            <LogOut size={16} /> Logout
-          </button>
+          <h1 className="text-2xl font-bold flex items-center gap-2">
+            🛡️ Admin Panel TPA
+          </h1>
         </div>
       </div>
 
@@ -209,7 +183,6 @@ const AdminDashboard = () => {
         {/* MANAJEMEN BERITA */}
         {activeTab === "news" && (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Form Input */}
             <div className="bg-white rounded-xl shadow-lg p-6 h-fit">
               <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
                 <Plus size={20} className="text-blue-600" /> Tambah Berita
@@ -247,7 +220,7 @@ const AdminDashboard = () => {
 
                 <div>
                   <label className="block text-sm font-bold text-gray-600 mb-1">
-                    Gambar Berita
+                    Upload Gambar
                   </label>
                   <input
                     type="file"
@@ -259,7 +232,7 @@ const AdminDashboard = () => {
                     }
                   />
                   <p className="text-xs text-gray-400 mt-1">
-                    *Upload dari laptop atau kamera
+                    *Format: JPG, PNG, JPEG
                   </p>
                 </div>
 
