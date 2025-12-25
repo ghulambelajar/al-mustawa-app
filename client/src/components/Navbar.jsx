@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import logoTPA from "../assets/images/logo mustawa.png";
+import { LogIn } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,13 +16,14 @@ const Navbar = () => {
               alt="Logo TPA Al-Mustawa"
               className="h-10 w-auto"
             />
-            <span className="font-bold text-lg tracking-wider">
+            <span className="font-bold text-lg tracking-wider hidden sm:block">
               TPA AL-MUSTAWA
             </span>
           </div>
 
+          {/* MENU DESKTOP */}
           <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
+            <div className="ml-10 flex items-center space-x-4">
               <Link
                 to="/"
                 className="hover:text-blue-400 px-3 py-2 rounded-md font-medium transition"
@@ -52,16 +54,24 @@ const Navbar = () => {
               >
                 Kontak
               </Link>
+
+              {/* --- TOMBOL LOGIN ADMIN (BARU) --- */}
+              <Link
+                to="/login"
+                className="bg-slate-700 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-bold text-sm transition flex items-center gap-2 border border-slate-600"
+              >
+                Login Admin
+              </Link>
             </div>
           </div>
 
+          {/* TOMBOL MENU MOBILE */}
           <div className="-mr-2 flex md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="bg-slate-800 p-2 rounded-md text-gray-400 hover:text-white focus:outline-none"
             >
               <span className="sr-only">Open menu</span>
-
               <svg
                 className="h-6 w-6"
                 xmlns="http://www.w3.org/2000/svg"
@@ -83,11 +93,12 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* MENU MOBILE */}
       {isOpen && (
-        <div className="md:hidden bg-slate-800">
+        <div className="md:hidden bg-slate-800 shadow-xl">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <Link
-              to="#"
+              to="/"
               className="block hover:bg-slate-700 px-3 py-2 rounded-md text-base font-medium"
             >
               Beranda
@@ -99,16 +110,30 @@ const Navbar = () => {
               Tentang Kami
             </Link>
             <Link
-              to="/activity"
+              to="/news"
               className="block hover:bg-slate-700 px-3 py-2 rounded-md text-base font-medium"
             >
-              Kegiatan
+              Berita
+            </Link>
+            <Link
+              to="/registration"
+              className="block hover:bg-slate-700 px-3 py-2 rounded-md text-base font-medium"
+            >
+              Pendaftaran
             </Link>
             <Link
               to="/contact"
               className="block hover:bg-slate-700 px-3 py-2 rounded-md text-base font-medium"
             >
               Kontak
+            </Link>
+
+            {/* Login di Mobile */}
+            <Link
+              to="/login"
+              className="block bg-blue-900 hover:bg-blue-800 px-3 py-2 rounded-md text-base font-bold text-center mt-4"
+            >
+              Login Administrator
             </Link>
           </div>
         </div>
