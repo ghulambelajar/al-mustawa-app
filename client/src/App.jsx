@@ -8,6 +8,7 @@ import News from "./pages/News";
 import NewsDetail from "./pages/NewsDetail";
 import Register from "./pages/Register";
 import AdminDashboard from "./pages/adminDashboard";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/news/:id" element={<NewsDetail />} />{" "}
           <Route path="/registration" element={<Register />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
 
         <Footer />
