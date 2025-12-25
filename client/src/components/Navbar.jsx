@@ -1,21 +1,46 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logoTPA from "../assets/images/logo mustawa.png";
-import { LogIn } from "lucide-react";
+import { LogIn, LogOut, User } from "lucide-react";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+
+  // check login status when opened
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  //Logout function from navbar
+  const handleLogout = () => {
+    Swal.fire({
+      title: "Logout?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Ya",
+      cancelButtonText: "Batal",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        localStorage.removeItem("token");
+        setIsLoggedIn(false);
+        navigate("/login");
+        Swal.fire("Berhasil", "Anda telah logout", "success");
+      }
+    });
+  };
 
   return (
     <nav className="bg-slate-900 text-white fixed w-full z-50 top-0 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-2">
-            <img
-              src={logoTPA}
-              alt="Logo TPA Al-Mustawa"
-              className="h-10 w-auto"
-            />
+            <img src={logoTPA} alt="Logo" className="h-10 w-auto" />
             <span className="font-bold text-lg tracking-wider hidden sm:block">
               TPA AL-MUSTAWA
             </span>
@@ -54,12 +79,29 @@ const Navbar = () => {
                 Kontak
               </Link>
 
-              <Link
-                to="/login"
-                className="bg-slate-700 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-bold text-sm transition flex items-center gap-2 border border-slate-600"
-              >
-                Login Admin
-              </Link>
+              {isLoggedIn ? (
+                <div className="flex gap-2">
+                  <Link
+                    to="/admin/dashboard"
+                    className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg font-bold text-sm transition flex items-center gap-2"
+                  >
+                    <User size={16} /> Dashboard
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded-lg font-bold text-sm transition flex items-center gap-2"
+                  >
+                    <LogOut size={16} />
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  to="/login"
+                  className="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg font-bold text-sm transition flex items-center gap-2 border border-slate-600"
+                >
+                  <LogIn size={16} /> Login Admin
+                </Link>
+              )}
             </div>
           </div>
 
@@ -100,12 +142,6 @@ const Navbar = () => {
               Beranda
             </Link>
             <Link
-              to="/about"
-              className="block hover:bg-slate-700 px-3 py-2 rounded-md text-base font-medium"
-            >
-              Tentang Kami
-            </Link>
-            <Link
               to="/news"
               className="block hover:bg-slate-700 px-3 py-2 rounded-md text-base font-medium"
             >
@@ -117,19 +153,22 @@ const Navbar = () => {
             >
               Pendaftaran
             </Link>
-            <Link
-              to="/contact"
-              className="block hover:bg-slate-700 px-3 py-2 rounded-md text-base font-medium"
-            >
-              Kontak
-            </Link>
 
-            <Link
-              to="/login"
-              className="block bg-blue-900 hover:bg-blue-800 px-3 py-2 rounded-md text-base font-bold text-center mt-4"
-            >
-              Login Administrator
-            </Link>
+            {isLoggedIn ? (
+              <button
+                onClick={handleLogout}
+                className="w-full text-left block bg-red-600 hover:bg-red-700 px-3 py-2 rounded-md text-base font-bold mt-4"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link
+                to="/login"
+                className="block bg-blue-900 hover:bg-blue-800 px-3 py-2 rounded-md text-base font-bold text-center mt-4"
+              >
+                Login Administrator
+              </Link>
+            )}
           </div>
         </div>
       )}
