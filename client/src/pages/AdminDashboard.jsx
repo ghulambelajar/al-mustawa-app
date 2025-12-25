@@ -69,16 +69,30 @@ const AdminDashboard = () => {
 
   const handlePostNews = async (e) => {
     e.preventDefault();
+
+    // Pakai FormData untuk kirim File
+    const formData = new FormData();
+    formData.append("title", newsForm.title);
+    formData.append("content", newsForm.content);
+    formData.append("event_date", newsForm.event_date);
+    if (newsForm.image) {
+      formData.append("image", newsForm.image); // Kirim filenya
+    }
+
     try {
-      await axios.post("http://localhost:5000/api/news", newsForm);
+      // Content-Type akan otomatis diurus oleh axios saat pakai FormData
+      await axios.post("http://localhost:5000/api/news", formData);
+
       Swal.fire("Sukses", "Berita berhasil diterbitkan!", "success");
-      setNewsForm({ title: "", content: "", image_url: "", event_date: "" }); // Reset form
+      setNewsForm({ title: "", content: "", event_date: "", image: null });
       fetchNews();
+
+      document.getElementById("fileInput").value = "";
     } catch (error) {
+      console.error(error);
       Swal.fire("Gagal", "Terjadi kesalahan", "error");
     }
   };
-
   const handleDeleteNews = async (id) => {
     const result = await Swal.fire({
       title: "Yakin mau hapus?",
