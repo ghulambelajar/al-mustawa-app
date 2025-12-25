@@ -1,11 +1,14 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const path = require("path");
 const db = require("./config/db");
+
 const newsRoutes = require("./routes/newRoutes");
 const contactRoutes = require("./routes/contactRoutes");
 const registrationRoutes = require("./routes/registrationRoutes");
 const authRoutes = require("./routes/authRoutes");
+
 // configure env
 dotenv.config();
 
@@ -15,6 +18,9 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+
+// access the folder to upload
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // main route
 app.get("/", (req, res) => {
