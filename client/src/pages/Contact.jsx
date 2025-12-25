@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import logoHeader from "../assets/images/home-mustawa.png";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -32,7 +33,7 @@ const Contact = () => {
     <div className="min-h-screen bg-white font-sans text-slate-800">
       <div className="relative h-[40vh] flex items-center justify-center">
         <img
-          src="https://images.unsplash.com/photo-1564121211835-e88c852648ab?q=80&w=2070"
+          src={logoHeader}
           alt="Masjid"
           className="absolute inset-0 w-full h-full object-cover"
         />

@@ -1,5 +1,6 @@
 import { Play } from "lucide-react";
 import DirekturTPA from "../assets/images/galeri-foto-bersama3.png";
+import LogoTPA from "../assets/images/logo mustawa.png";
 
 const WelcomeSection = () => {
   return (
@@ -44,16 +45,11 @@ const WelcomeSection = () => {
 
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-gray-200 rounded-full overflow-hidden">
-                <img
-                  src="https://ui-avatars.com/api/?name=Direktur+TPA"
-                  alt="Avatar"
-                />
+                <img src={LogoTPA} alt="Avatar" />
               </div>
               <div>
-                <p className="font-bold text-slate-900">
-                  Ustadzah Aisyah, S.Kom
-                </p>
-                <p className="text-sm text-gray-500">Kepala Sekolah</p>
+                <p className="font-bold text-slate-900">Ustadzah Nur</p>
+                <p className="text-sm text-gray-500">Direktur TPA</p>
               </div>
             </div>
           </div>
