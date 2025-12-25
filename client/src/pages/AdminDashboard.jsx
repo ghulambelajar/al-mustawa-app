@@ -229,6 +229,7 @@ const AdminDashboard = () => {
                     }
                   />
                 </div>
+
                 <div>
                   <label className="block text-sm font-bold text-gray-600 mb-1">
                     Tanggal Kegiatan
@@ -243,21 +244,25 @@ const AdminDashboard = () => {
                     }
                   />
                 </div>
+
                 <div>
                   <label className="block text-sm font-bold text-gray-600 mb-1">
-                    Link Gambar (URL)
+                    Gambar Berita
                   </label>
                   <input
-                    type="text"
-                    required
-                    className="w-full border rounded p-2"
-                    placeholder="https://..."
-                    value={newsForm.image_url}
+                    type="file"
+                    id="fileInput"
+                    accept="image/*"
+                    className="w-full border rounded p-2 bg-white"
                     onChange={(e) =>
-                      setNewsForm({ ...newsForm, image_url: e.target.value })
+                      setNewsForm({ ...newsForm, image: e.target.files[0] })
                     }
                   />
+                  <p className="text-xs text-gray-400 mt-1">
+                    *Upload dari laptop atau kamera
+                  </p>
                 </div>
+
                 <div>
                   <label className="block text-sm font-bold text-gray-600 mb-1">
                     Isi Berita
@@ -281,7 +286,6 @@ const AdminDashboard = () => {
               </form>
             </div>
 
-            {/* Daftar Berita */}
             <div className="lg:col-span-2 space-y-4">
               <h2 className="text-xl font-bold text-slate-800 mb-4">
                 Daftar Berita Aktif
