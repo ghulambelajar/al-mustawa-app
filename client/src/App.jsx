@@ -7,7 +7,7 @@ import About from "./pages/About";
 import News from "./pages/News";
 import NewsDetail from "./pages/NewsDetail";
 import Register from "./pages/Register";
-import AdminDashboard from "./pages/adminDashboard";
+import AdminDashboard from "./pages/AdminDashboard";
 import Login from "./pages/Login";
 
 function App() {
