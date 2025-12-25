@@ -37,7 +37,38 @@ const getNewsById = async (req, res) => {
   }
 };
 
+const createNews = async (req, res) => {
+  const { title, content, image_url, event_date } = req.body;
+  try {
+    const result = await db.query(
+      `INSERT INTO news (title, content, image_url, event_date) 
+             VALUES ($1, $2, $3, $4) RETURNING *`,
+      [title, content, image_url, event_date]
+    );
+    res.status(201).json({
+      success: true,
+      message: "Berita berhasil dibuat!",
+      data: result.rows[0],
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Gagal membuat berita" });
+  }
+};
+
+const deleteNews = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await db.query("DELETE FROM news WHERE id = $1", [id]);
+    res.json({ success: true, message: "Berita berhasil dihapus" });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Gagal menghapus berita" });
+  }
+};
+
 module.exports = {
   getAllNews,
   getNewsById,
+  createNews,
+  deleteNews,
 };
