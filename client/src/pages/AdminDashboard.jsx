@@ -49,8 +49,22 @@ const AdminDashboard = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
+    Swal.fire({
+      title: "Mau Keluar?",
+      text: "Anda harus login ulang untuk masuk kembali.",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Ya, Logout!",
+      cancelButtonText: "Batal",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem("token");
+        navigate("/login");
+        Swal.fire("Logout!", "Anda berhasil keluar.", "success");
+      }
+    });
   };
 
   const handlePostNews = async (e) => {
