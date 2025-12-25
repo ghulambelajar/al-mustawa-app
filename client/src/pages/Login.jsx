@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -7,6 +7,12 @@ const Login = () => {
   const [input, setInput] = useState({ username: "", password: "" });
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/admin/dashboard");
+    }
+  }, [navigate]);
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -26,7 +32,6 @@ const Login = () => {
           timer: 1500,
         });
 
-        // Pindah ke Dashboard
         navigate("/admin/dashboard");
       }
     } catch (error) {
