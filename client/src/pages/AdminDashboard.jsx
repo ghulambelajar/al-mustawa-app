@@ -13,8 +13,8 @@ const AdminDashboard = () => {
   const [newsForm, setNewsForm] = useState({
     title: "",
     content: "",
-    image_url: "",
     event_date: "",
+    image: null,
   });
 
   const navigate = useNavigate();
