@@ -5,6 +5,7 @@ const db = require("./config/db");
 const newsRoutes = require("./routes/newRoutes");
 const contactRoutes = require("./routes/contactRoutes");
 const registrationRoutes = require("./routes/registrationRoutes");
+const authRoutes = require("./routes/authRoutes");
 // configure env
 dotenv.config();
 
@@ -37,6 +38,7 @@ app.get("/test-db", async (req, res) => {
 app.use("/api/news", newsRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/register", registrationRoutes);
+app.use("/api/auth", authRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
