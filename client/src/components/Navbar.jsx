@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import logoTPA from "../assets/images/logo mustawa.png";
 import { LogIn, LogOut, User } from "lucide-react";
 import Swal from "sweetalert2";
@@ -8,16 +8,17 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // check login status when opened
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
     }
-  }, []);
+  }, [location]);
 
-  //Logout function from navbar
   const handleLogout = () => {
     Swal.fire({
       title: "Logout?",
@@ -90,6 +91,7 @@ const Navbar = () => {
                   <button
                     onClick={handleLogout}
                     className="bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded-lg font-bold text-sm transition flex items-center gap-2"
+                    title="Logout"
                   >
                     <LogOut size={16} />
                   </button>
@@ -133,7 +135,7 @@ const Navbar = () => {
       </div>
 
       {isOpen && (
-        <div className="md:hidden bg-slate-800 shadow-xl">
+        <div className="md:hidden bg-slate-800 shadow-xl border-t border-slate-700">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <Link
               to="/"
@@ -141,6 +143,14 @@ const Navbar = () => {
             >
               Beranda
             </Link>
+
+            <Link
+              to="/about"
+              className="block hover:bg-slate-700 px-3 py-2 rounded-md text-base font-medium"
+            >
+              Tentang Kami
+            </Link>
+
             <Link
               to="/news"
               className="block hover:bg-slate-700 px-3 py-2 rounded-md text-base font-medium"
@@ -152,6 +162,13 @@ const Navbar = () => {
               className="block hover:bg-slate-700 px-3 py-2 rounded-md text-base font-medium"
             >
               Pendaftaran
+            </Link>
+
+            <Link
+              to="/contact"
+              className="block hover:bg-slate-700 px-3 py-2 rounded-md text-base font-medium"
+            >
+              Kontak
             </Link>
 
             {isLoggedIn ? (
