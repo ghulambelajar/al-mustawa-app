@@ -21,7 +21,6 @@ const Navbar = () => {
             </span>
           </div>
 
-          {/* MENU DESKTOP */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-center space-x-4">
               <Link
@@ -55,7 +54,6 @@ const Navbar = () => {
                 Kontak
               </Link>
 
-              {/* --- TOMBOL LOGIN ADMIN (BARU) --- */}
               <Link
                 to="/login"
                 className="bg-slate-700 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-bold text-sm transition flex items-center gap-2 border border-slate-600"
@@ -65,7 +63,6 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* TOMBOL MENU MOBILE */}
           <div className="-mr-2 flex md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -93,7 +90,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* MENU MOBILE */}
       {isOpen && (
         <div className="md:hidden bg-slate-800 shadow-xl">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
@@ -128,7 +124,6 @@ const Navbar = () => {
               Kontak
             </Link>
 
-            {/* Login di Mobile */}
             <Link
               to="/login"
               className="block bg-blue-900 hover:bg-blue-800 px-3 py-2 rounded-md text-base font-bold text-center mt-4"
